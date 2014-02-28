@@ -54,4 +54,12 @@ describe "Restaurant" do
   it "has a grade" do
     expect(Restaurant.find_by(grade: "A")).to eq(@restaurant)
   end
+
+  it "can seed data correctly" do
+    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:seed"].invoke
+    expect(Restaurant.find_by(id: 3))).to eq
+    Rake::Task["db:destroy"].invoke
+
+  end
 end
