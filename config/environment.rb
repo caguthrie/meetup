@@ -4,6 +4,7 @@ Bundler.require(:default)
 
 require_relative '../models/restaurant'
 require_relative '../models/violation'
+require_relative '../spec/migration_spec.rb'
 # require_relative '../app'
 
 ActiveRecord::Base.establish_connection(
