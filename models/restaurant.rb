@@ -1,13 +1,22 @@
 class Restaurant < ActiveRecord::Base
 
+  has_many :violations, through: :restaurant_violations
+
+  VALID_LETTERS = ["B","C","Z"]
+
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
     f.gets
     while line = f.gets
-      components = line.gsub("\"", "").split(",")
-      next if components[12] == "A"
+      # begin
+        components = line.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub("\"", "").split(",")
+      # rescue ArgumentError
+      #   return true
+      # end
+
+      next if !VALID_LETTERS.include?(components[12])
       next if components[5].length != 5 # Come back to this zip code
-      next if Restaurant.exists? phone: components[6].to_i
+      next if Restaurant.exists?(phone: components[6].to_i)
       
       r = Restaurant.create
       r.name = components[1].downcase.titleize
