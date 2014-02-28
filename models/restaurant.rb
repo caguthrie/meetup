@@ -5,6 +5,7 @@ class Restaurant < ActiveRecord::Base
     f.gets
     while line = f.gets
       components = line.gsub("\"", "").split(",")
+      next if components[12] == "A"      
       r = Restaurant.create
       r.name = components[1].downcase.titleize
       r.building_number = components[3]
@@ -12,13 +13,14 @@ class Restaurant < ActiveRecord::Base
       r.zip = components[5]
       r.phone = components[6]
       r.cuisinecode = components[7]
-      r.vio_code = components[10]
+      # r.vio_code = components[10]
       r.score = components[11]
       r.grade = components[12]
       r.save
       # binding.pry
       # puts "here"
     end
+    f.close
   end
 end
 

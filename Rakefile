@@ -6,10 +6,17 @@ namespace :db do
   task :migrate => [:environment] do
     require_relative './db/migrations/01_create_restaurants.rb'
     CreateRestaurants.migrate(:up) if defined?(CreateRestaurants)
+    CreateViolations.migrate(:up) if defined?(CreateViolations)
   end
 
-  task :seed_restaurants => [:environment] do
+  # task :rollback => [:environment] do
+  #   require_relative './db/migrations/01_create_restaurants.rb'
+  #   CreateRestaurants.migrate(:down) if defined?(CreateRestaurants)    
+  # end
+
+  task :seed => [:environment] do
     Restaurant.seed
+    Violation.seed
   end
 end
 

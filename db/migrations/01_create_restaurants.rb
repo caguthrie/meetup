@@ -7,7 +7,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.integer :zip
       t.integer :phone
       t.integer :cuisinecode
-      t.integer :vio_code
+      # t.integer :vio_code
       t.integer :score
       t.string :grade
     end

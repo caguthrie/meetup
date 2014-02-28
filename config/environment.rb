@@ -8,6 +8,6 @@ require_relative '../models/violation'
 
 ActiveRecord::Base.establish_connection(
    :adapter => "sqlite3",
-   :database => 'db/restaurants.sqlite3'
+   :database => 'db/restaurants.db'
 )
 
