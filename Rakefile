@@ -5,6 +5,7 @@ end
 namespace :db do
   task :migrate => [:environment] do
     require_relative './db/migrations/01_create_restaurants.rb'
+    require_relative './db/migrations/02_create_violations.rb'
     CreateRestaurants.migrate(:up) if defined?(CreateRestaurants)
     CreateViolations.migrate(:up) if defined?(CreateViolations)
   end
