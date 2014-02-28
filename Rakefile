@@ -4,8 +4,12 @@ end
 
 namespace :db do
   task :migrate => [:environment] do
-    require_relative './db/migrations/01_create_messages.rb'
-    CreateMessages.migrate(:up) if defined?(CreateMessages)
+    require_relative './db/migrations/01_create_restaurants.rb'
+    CreateRestaurants.migrate(:up) if defined?(CreateRestaurants)
+  end
+
+  task :seed_restaurants => [:environment] do
+    Restaurant.seed
   end
 end
 
