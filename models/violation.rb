@@ -1,5 +1,7 @@
 class Violation < ActiveRecord::Base
 
+  has_many :violations, through: :restaurant_violations
+  
   def self.seed
     f = File.new("./textfiles/Violation.txt", 'r')
     f.gets
