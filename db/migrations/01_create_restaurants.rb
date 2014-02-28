@@ -1,12 +1,12 @@
 class CreateRestaurants < ActiveRecord::Migration
   def change
     create_table :restaurants do |t|
-      t.string :dba
+      t.string :name
       t.integer :building_number
       t.string :street_name
       t.integer :zip
       t.integer :phone
-      t.intger :cuisinecode
+      t.integer :cuisinecode
       t.integer :vio_code
       t.integer :score
       t.string :grade
