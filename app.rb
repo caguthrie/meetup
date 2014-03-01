@@ -4,6 +4,10 @@ class RestaurantApp < Sinatra::Base
     erb :index
   end
 
+  post '/' do
+    erb :index
+  end
+
   get '/:zip_url' do
     @zip_url = params[:zip_url].to_i
     # binding.pry

@@ -19,7 +19,19 @@ class Restaurant < ActiveRecord::Base
     vio_id_array.collect! do |violation|
       violation.first.description
     end
+  end
 
+  def get_vio_code
+    vio_id_array = RestaurantViolation.where(rest_id: self.id)
+    vio_id_array.collect! do |v|
+      v.vio_id
+    end
+    vio_id_array.collect! do |vio_id|
+      Violation.where(id: vio_id)
+    end
+    vio_id_array.collect! do |violation|
+      violation.first.vio_code
+    end
   end
 
   def self.zip_list(zip_code)

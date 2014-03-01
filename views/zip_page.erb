@@ -2,6 +2,22 @@
 <html>
 <body>
   <h1>Checking zip code <%=@zip_url%></h1>
-  <p> List: <%=Restaurant.create_profile(Restaurant.zip_list(@zip_url)) %> </p>
+  <p> List: </p>
+
+  <% Restaurant.zip_list(@zip_url).each do |r| %>
+  <h2><%= r.name %></h2>
+  <h3><%= r.phone_num %></h3>
+  <h3><%= r.address %></h3>
+  <ol>
+    <% r.get_violations.each do |vio| %>
+      <li><%= vio %></li>
+    <% end %>
+
+    <% r.get_vio_code.each do |vio_code| %>
+      <li><%= vio_code %></li>
+    <% end %>
+  </ol>
+  <% end %>
+
 </body>
 </html>
