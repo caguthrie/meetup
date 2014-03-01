@@ -4,15 +4,22 @@ class Restaurant < ActiveRecord::Base
 
   VALID_LETTERS = ["B","C","Z"]
 
-  def phone
-    @phone.to_s.split('').insert(3, "-").insert(7, "-").join()
+  def phone_num
+    self.phone.to_s.strip.split('').insert(3, "-").insert(7, "-").join()
   end
 
   def get_violations
-    vio_id_array = RestaurantViolations.find(id: self.id).vio_id
-    vio_id_array.collect do |vio_id|
-      Violation.find(id: vio_id).description
+    vio_id_array = RestaurantViolation.where(rest_id: self.id)
+    vio_id_array.collect! do |v|
+      v.vio_id
     end
+    vio_id_array.collect! do |vio_id|
+      Violation.where(id: vio_id)
+    end
+    vio_id_array.collect! do |violation|
+      violation.first.description
+    end
+
   end
 
   def self.zip_list(zip_code)
@@ -23,17 +30,19 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.create_profile(array)
-    array.collect do |restaurant|
-      restaurant.name
-      restaurant.address
-      restaurant.phone
-      restaurant.get_violations
+    array.collect! do |restaurant|
+      # binding.pry
+      "#{restaurant.name} #{restaurant.address} ph #{restaurant.phone_num} #{restaurant.get_violations}"
+      # restaurant.name
+      # restaurant.address
+      # restaurant.phone
+      # restaurant.get_violations
     end
    puts array
   end
 
   def address
-    @address = "#{self.building_number} #{self.street_name} #{zip}"
+    @address = "#{self.building_number} #{self.street_name} #{self.zip}"
     @address
   end
 
