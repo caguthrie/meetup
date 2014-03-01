@@ -15,11 +15,11 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
-  def self.zip_list(zip)
-    Restaurant.find(zip: zip).each do |restaurant|
+  def self.zip_list(zip_code)
+    Restaurant.where(zip: zip_code).each do |restaurant|
       puts restaurant.name
     end
-    Restaurant.find(zip: zip)
+    Restaurant.where(zip: zip_code)
   end
 
   def self.create_profile(array)

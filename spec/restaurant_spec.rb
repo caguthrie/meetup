@@ -11,11 +11,11 @@ describe Restaurant do
     @restaurant.cuisinecode = 13
     @restaurant.score = 12
     @restaurant.grade = "B"
-    @restaurant.save
+    # @restaurant.save
   end
 
   after(:each) do
-    @restaurant.destroy
+    # @restaurant.destroy
   end
 
   it "has a name" do

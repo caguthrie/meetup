@@ -6,23 +6,23 @@ describe Violation do
     @violation.vio_code = "10F"
     @violation.critical_vio = true
     @violation.description = "hello"
-    @violation.save
+    # @violation.save
   end
 
   after(:each) do
-    @violation.destroy
+    # @violation.destroy
   end
 
   it "has a code" do
-    expect(violation.find_by(vio_code: "10F")).to eq(@violation)
+    expect(Violation.find_by(vio_code: "10F")).to eq(@violation)
   end
 
   it "has a critical flag" do
-    expect(violation.find_by(critical_vio: true)).to eq(@violation)
+    expect(Violation.find_by(critical_vio: true)).to eq(@violation)
   end 
 
   it "has a description" do
-    expect(violation.find_by(description: "hello")).to eq(@violation)
+    expect(Violation.find_by(description: "hello")).to eq(@violation)
   end
 
 end
