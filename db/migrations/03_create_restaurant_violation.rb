@@ -1,6 +1,7 @@
 class CreateRestaurantViolation < ActiveRecord::Migration
   def change
-    create_table :restaurants_violations do |t|
+    drop_table :restaurant_violations
+    create_table :restaurant_violations do |t|
       t.integer :vio_id
       t.integer :rest_id
     end

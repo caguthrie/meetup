@@ -1,11 +1,43 @@
 class Restaurant < ActiveRecord::Base
 
-  has_many :violations, through: :restaurant_violations
+  has_many :violations, through: :restaurants_violations
 
   VALID_LETTERS = ["B","C","Z"]
 
   def phone
     @phone.to_s.split('').insert(3, "-").insert(7, "-").join()
+  end
+
+  def get_violations
+    vio_id_array = RestaurantViolations.find(id: self.id).vio_id
+    vio_id_array.collect do |vio_id|
+      Violation.find(id: vio_id).description
+    end
+  end
+
+  def self.zip_list(zip)
+    Restaurant.find(zip: zip).each do |restaurant|
+      puts restaurant.name
+    end
+    Restaurant.find(zip: zip)
+  end
+
+  def self.create_profile(array)
+    array.collect do |restaurant|
+      restaurant.name
+      restaurant.address
+      restaurant.phone
+      restaurant.get_violations
+    end
+   puts array
+  end
+
+  def address
+    @address = "#{self.building_number} #{self.street_name} #{zip}"
+    @address
+  end
+
+  def map_address
   end
 
   def self.seed
