@@ -4,6 +4,10 @@ class Restaurant < ActiveRecord::Base
 
   VALID_LETTERS = ["B","C","Z"]
 
+  def phone
+    @phone.to_s.split('').insert(3, "-").insert(7, "-").join()
+  end
+
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
     f.gets
