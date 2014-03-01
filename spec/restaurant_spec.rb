@@ -9,9 +9,8 @@ describe Restaurant do
     @restaurant.zip = 11225
     @restaurant.phone = 5555555555
     @restaurant.cuisinecode = 13
-    # @restaurant.vio_code = 06
     @restaurant.score = 12
-    @restaurant.grade = "A"
+    @restaurant.grade = "B"
     @restaurant.save
   end
 
@@ -52,6 +51,29 @@ describe Restaurant do
   end
 
   it "has a grade" do
-    expect(Restaurant.find_by(grade: "A")).to eq(@restaurant)
+    expect(Restaurant.find_by(grade: "B")).to eq(@restaurant)
+  end
+
+  it "can match to violations" do
+    r = Restaurant.new
+    r.id = 3
+
+    v = Violation.new
+    v.id = 4
+    v.description = "first vio"
+
+    v2 = Violation.new
+    v2.id = 5
+    v2.description = "second vio"
+
+    rv = RestaurantViolation.new
+    rv.vio_code = 5
+    rv.rest_code = 3
+
+    rv2 = RestaurantViolation.new
+    rv2.vio_code = 4
+    rv2.rest_code = 3
+
+    expect(r.get_violations).to eq(["first vio", "second vio"])
   end
 end
