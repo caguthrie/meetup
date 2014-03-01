@@ -23,9 +23,9 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.zip_list(zip_code)
-    Restaurant.where(zip: zip_code).each do |restaurant|
-      puts restaurant.name
-    end
+    # Restaurant.where(zip: zip_code).each do |restaurant|
+    #   # puts restaurant.name
+    # end
     Restaurant.where(zip: zip_code)
   end
 
@@ -38,7 +38,6 @@ class Restaurant < ActiveRecord::Base
       # restaurant.phone
       # restaurant.get_violations
     end
-   puts array
   end
 
   def address

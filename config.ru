@@ -1,6 +1,6 @@
 # config.ru
 require './config/environment'
 
-run MessagesApp
+run RestaurantApp
 
 $stdout.sync = true
