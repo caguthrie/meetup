@@ -1,11 +1,18 @@
 class Restaurant < ActiveRecord::Base
 
-  has_many :violations, through: :restaurant_violations
+  has_many :violations, through: :restaurants_violations
 
   VALID_LETTERS = ["B","C","Z"]
 
   def phone
     @phone.to_s.split('').insert(3, "-").insert(7, "-").join()
+  end
+
+  def get_violations
+    vio_id_array = RestaurantViolations.find_by(id: self.id).vio_id
+    vio_id_array.collect do |vio_id|
+      Violation.find_by(id: vio_id).description
+    end
   end
 
   def self.seed
