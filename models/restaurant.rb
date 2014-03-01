@@ -15,6 +15,14 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def address
+    @address = "#{self.building_number} #{self.street_name} #{zip}"
+    @address
+  end
+
+  def map_address
+  end
+
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
     f.gets
