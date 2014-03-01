@@ -15,6 +15,23 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def self.zip_list(zip)
+    Restaurant.find(zip: zip).each do |restaurant|
+      puts restaurant.name
+    end
+    Restaurant.find(zip: zip)
+  end
+
+  def self.create_profile(array)
+    array.collect do |restaurant|
+      restaurant.name
+      restaurant.address
+      restaurant.phone
+      restaurant.get_violations
+    end
+   puts array
+  end
+
   def address
     @address = "#{self.building_number} #{self.street_name} #{zip}"
     @address
