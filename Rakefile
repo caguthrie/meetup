@@ -6,8 +6,8 @@ namespace :db do
   task :migrate => [:environment] do
     # require_relative './db/migrations/01_create_restaurants.rb'
     # require_relative './db/migrations/02_create_violations.rb'
-    require_relative './db/migrations/03_create_restaurant_violation.rb'
-    CreateRestaurantViolation.migrate(:up) if defined?(CreateRestaurantViolation)
+    # require_relative './db/migrations/03_create_restaurant_violation.rb'
+    # CreateRestaurantViolation.migrate(:up) if defined?(CreateRestaurantViolation)
     # CreateRestaurants.migrate(:up) if defined?(CreateRestaurants)
     # CreateViolations.migrate(:up) if defined?(CreateViolations)
   end
@@ -20,7 +20,7 @@ namespace :db do
   task :seed => [:environment] do
     # Restaurant.seed
     # Violation.seed
-    RestaurantViolation.seed
+    # RestaurantViolation.seed
   end
 end
 
