@@ -10,7 +10,7 @@ class RestaurantApp < Sinatra::Base
 
   get '/:zip_url' do
     @zip_url = params[:zip_url].to_i
-    # binding.pry
+    @worst = Restaurant.worst_restaurant_in_zip(@zip_url)
     if !Restaurant.exists?(zip: @zip_url)
       erb :no_zip
     else

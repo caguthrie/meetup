@@ -53,11 +53,17 @@ class Restaurant < ActiveRecord::Base
   end
 
   def address
-    @address = "#{self.building_number} #{self.street_name} #{self.zip}"
+    @address = "#{self.building_number} #{self.street_name}, #{self.zip}"
     @address
   end
 
-  def map_address
+  def self.worst_restaurant_in_zip(zip_code)
+    r_arr = Restaurant.zip_list(zip_code)
+    worst = r_arr.first
+    r_arr.each do |r|
+      worst = r if r.score > worst.score
+    end
+    worst
   end
 
   def self.seed

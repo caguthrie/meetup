@@ -1,8 +1,5 @@
 require_relative '../config/environment'
 
-# print put bad restrautns in the db
-r = Restaurant.zip_list(11221)
-binding.pry
-Restaurant.create_profile(r)
+puts Geocoder.coordinates(Restaurant.find_by(id: 1).address)
 
-# prints out restraunts and 
+# puts Geocoder.coordinates("11413 Via Playa de Cortes")

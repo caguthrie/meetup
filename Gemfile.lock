@@ -24,6 +24,7 @@ GEM
     daemons (1.1.9)
     diff-lcs (1.2.5)
     eventmachine (1.0.0)
+    geocoder (1.1.9)
     i18n (0.6.9)
     json (1.7.5)
     method_source (0.8.2)
@@ -76,6 +77,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  geocoder
   json
   pry
   rspec

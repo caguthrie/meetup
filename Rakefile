@@ -7,9 +7,11 @@ namespace :db do
     # require_relative './db/migrations/01_create_restaurants.rb'
     # require_relative './db/migrations/02_create_violations.rb'
     # require_relative './db/migrations/03_create_restaurant_violation.rb'
+    require_relative './db/migrations/05_add_geo_columns.rb'
     # CreateRestaurantViolation.migrate(:up) if defined?(CreateRestaurantViolation)
     # CreateRestaurants.migrate(:up) if defined?(CreateRestaurants)
     # CreateViolations.migrate(:up) if defined?(CreateViolations)
+    AddGeoToRestaurants.migrate(:up) if defined?(AddGeoToRestaurants)
   end
 
   # task :rollback => [:environment] do

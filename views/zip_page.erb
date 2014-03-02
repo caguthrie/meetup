@@ -8,81 +8,40 @@
     #map-canvas { height: 400px; width: 600px }
     #map-canvas img{ max-width: none; }
   </style>
-   <script type="text/javascript">
-
-      geocoder = new google.maps.Geocoder();
-
-      function getCoordinates = function (address, callback) {
-        var coordinates;
-        geocoder.geocode({ address: address}, function (results, status) {
-          coords_obj = results[0].geometry.location;
-          coordinates = [coords_obj.nb,coords_obj.ob];
-          callback(coordinates);
-        })
-      }
+  <% coords = Geocoder.coordinates(@worst.address) %>
+  <% zip_coords = Geocoder.coordinates(@zip_url) %>
+  <script type="text/javascript">
 
       function initialize() {
 
+        var ll_worst = new google.maps.LatLng(<%=coords[0]%>, <%=coords[1]%>);
 
-        var sd_arr = getCoordinates('11413 Via Playa de Cortes', function(coordinates){ console.log(coordinates) })
-        var ll_sd = new google.maps.LatLng(sd_arr[0], sd_arr[1]);
-        var ll_riverton = new google.maps.LatLng(43.027778, -108.395);
-        var ll_ny = new google.maps.LatLng(40.67, -73.94);
+        var worst_string = "<%= "<h3>#{@worst.name}</h3><br>Unless you love to vomit, stay away.<p>" %>";
 
-        var sd_string = "<h3>San Diego, CA</h3><br><p>My hometown and where my coding adventure began";
-        var riverton_string = "<h3>Riverton, WY</h3><br>My dad's hometown and my favorite, relaxing, beautiful vacation spot."
-        var ny_string = "<h3>New York, NY</h3><br>My home for the last six years and the most exciting place I've ever lived."
-
-        var sd_info = new google.maps.InfoWindow({
-          content: sd_string
-        });
-        var riverton_info = new google.maps.InfoWindow({
-          content: riverton_string
-        });        
-        var ny_info = new google.maps.InfoWindow({
-          content: ny_string
+        var worst_info = new google.maps.InfoWindow({
+          content: worst_string
         });
 
         var mapOptions = {
-          center: new google.maps.LatLng(41.25, -98),
-          zoom: 4
+          center: new google.maps.LatLng(<%=zip_coords[0]%>, <%=zip_coords[1]%>),
+          zoom: 14
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
 
-        var marker_sd = new google.maps.Marker({
-          position: ll_sd,
+        var marker_worst = new google.maps.Marker({
+          position: ll_worst,
           map: map,
           animation: google.maps.Animation.DROP,
-          title: "San Diego"
+          title: "Worst Restaurant"
         }); 
 
-        var marker_riverton = new google.maps.Marker({
-          position: ll_riverton,
-          map: map,
-          animation: google.maps.Animation.DROP,
-          title: "Riverton"
-        }); 
-
-        var marker_ny = new google.maps.Marker({
-          position: ll_ny,
-          map: map,
-          animation: google.maps.Animation.DROP,
-          title: "New York"
-        }); 
-
-        google.maps.event.addListener(marker_sd, 'click', function() {
-          sd_info.open(map,marker_sd);
+        google.maps.event.addListener(marker_worst, 'click', function() {
+          worst_info.open(map,marker_worst);
         });
-        google.maps.event.addListener(marker_riverton, 'click', function() {
-          riverton_info.open(map,marker_riverton);
-        });
-        google.maps.event.addListener(marker_ny, 'click', function() {
-          ny_info.open(map,marker_ny);
-        });        
       }
       google.maps.event.addDomListener(window, 'load', initialize);
-  </script> 
+  </script>
 </head>
 <body>
   <div id="map-canvas"></div>
