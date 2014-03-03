@@ -5,6 +5,8 @@ class RestaurantApp < Sinatra::Base
   end
 
   post '/' do
+    @zip_arg = params[:ziparg]
+    redirect "/#{@zip_arg}"
     erb :index
   end
 
@@ -18,12 +20,5 @@ class RestaurantApp < Sinatra::Base
     end
   end
 
-  # post '/' do
-  #   m = Message.new
-  #   m.from = params[:from]
-  #   m.content = params[:content]
-  #   m.save
-  #   "success"
-  # end
 
 end

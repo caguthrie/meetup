@@ -3,8 +3,9 @@
 <body>
   <h1>Title Restaurant stuff</h1>
   <p> More information </p>
-  <form action=:zip>
-    Where are you eating? <input type="text" name ="zip" value="Your zip code here.">
+  <form action='/params[:ziparg]'>
+    <label for="ziparg">Where are you eating?</label> 
+    <input type="text" name="ziparg" id="ziparg" value="Your zip code here.">
   </form>
 
 </body>
