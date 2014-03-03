@@ -1,6 +1,6 @@
 "CUISINECODE","CODEDESC"
 "02","African"
-"03","American "
+"03","American"
 "05","Asian"
 "15","Cajun"
 "17","Caribbean"
