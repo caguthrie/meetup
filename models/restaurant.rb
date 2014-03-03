@@ -73,6 +73,13 @@ class Restaurant < ActiveRecord::Base
     while line = f.gets
       components = line.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub("\"", "").split(",")
 
+      begin
+        d = Date.iso8601(components[8].split(" ")[0])
+      rescue
+        next
+      end
+
+      next if (Date.today - d) > 200
       next if !VALID_LETTERS.include?(components[12])
       next if components[5].length != 5
       next if Restaurant.exists?(phone: components[6].to_i)
