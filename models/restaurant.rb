@@ -1,12 +1,17 @@
 class Restaurant < ActiveRecord::Base
 
   has_many :violations, through: :restaurants_violations
+  has_one :cuisines
 
   VALID_LETTERS = ["B","C","Z"]
 
   def phone_num
     self.phone.to_s.strip.split('').insert(3, "-").insert(7, "-").join()
   end
+
+  # def cuisine_info
+  #   self.cuisinecode.cuisine_description
+  # end
 
   def get_violations
     vio_id_array = RestaurantViolation.where(rest_id: self.id)

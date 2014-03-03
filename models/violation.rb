@@ -14,8 +14,6 @@ class Violation < ActiveRecord::Base
       v.vio_code = components[3]
       v.description = components[4]
       v.save
-      # binding.pry
-      # puts "here"
     end
     f.close
   end
