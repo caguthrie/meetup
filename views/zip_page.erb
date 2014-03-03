@@ -8,19 +8,32 @@
     #map-canvas { height: 400px; width: 600px }
     #map-canvas img{ max-width: none; }
   </style>
-  <% coords = Geocoder.coordinates(@worst.address) %>
+  <% coords1 = Geocoder.coordinates(@worst[0].address) %>
+  <% coords2 = Geocoder.coordinates(@worst[1].address) %>
+  <% coords3 = Geocoder.coordinates(@worst[2].address) %>
   <% zip_coords = Geocoder.coordinates(@zip_url) %>
   <script type="text/javascript">
 
       function initialize() {
 
-        var ll_worst = new google.maps.LatLng(<%=coords[0]%>, <%=coords[1]%>);
+        var ll_worst1 = new google.maps.LatLng(<%=coords1[0]%>, <%=coords1[1]%>);
+        var ll_worst2 = new google.maps.LatLng(<%=coords2[0]%>, <%=coords2[1]%>);
+        var ll_worst3 = new google.maps.LatLng(<%=coords3[0]%>, <%=coords3[1]%>);
 
-        var worst_string = "<%= "<h3>#{@worst.name}</h3><br>Unless you love to vomit, stay away.<p>" %>";
+        var worst_string1 = "<%= "<h3>#{@worst[0].name}</h3>#1 worst in #{@zip_url}<br><br>Extra 'flavor' with every meal!<p>" %>";
+        var worst_string2 = "<%= "<h3>#{@worst[1].name}</h3>#2 worst in #{@zip_url}<br><br>Unless you love to vomit, stay away.<p>" %>";
+        var worst_string3 = "<%= "<h3>#{@worst[2].name}</h3>#3 worst in #{@zip_url}<br><br>Food poisioning ahoy!<p>" %>";
 
-        var worst_info = new google.maps.InfoWindow({
-          content: worst_string
+        var worst_info1 = new google.maps.InfoWindow({
+          content: worst_string1
         });
+        var worst_info2 = new google.maps.InfoWindow({
+          content: worst_string2
+        });
+        var worst_info3 = new google.maps.InfoWindow({
+          content: worst_string3
+        });
+
 
         var mapOptions = {
           center: new google.maps.LatLng(<%=zip_coords[0]%>, <%=zip_coords[1]%>),
@@ -29,15 +42,35 @@
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
 
-        var marker_worst = new google.maps.Marker({
-          position: ll_worst,
+        var marker_worst1 = new google.maps.Marker({
+          position: ll_worst1,
           map: map,
           animation: google.maps.Animation.DROP,
-          title: "Worst Restaurant"
+          title: "#1 Worst Restaurant"
         }); 
 
-        google.maps.event.addListener(marker_worst, 'click', function() {
-          worst_info.open(map,marker_worst);
+        var marker_worst2 = new google.maps.Marker({
+          position: ll_worst2,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          title: "#2 Worst Restaurant"
+        }); 
+
+        var marker_worst3 = new google.maps.Marker({
+          position: ll_worst3,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          title: "#3 Worst Restaurant"
+        });         
+
+        google.maps.event.addListener(marker_worst1, 'click', function() {
+          worst_info1.open(map,marker_worst1);
+        });
+        google.maps.event.addListener(marker_worst2, 'click', function() {
+          worst_info2.open(map,marker_worst2);
+        });
+        google.maps.event.addListener(marker_worst3, 'click', function() {
+          worst_info3.open(map,marker_worst3);
         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
