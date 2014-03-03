@@ -35,20 +35,12 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.zip_list(zip_code)
-    # Restaurant.where(zip: zip_code).each do |restaurant|
-    #   # puts restaurant.name
-    # end
     Restaurant.where(zip: zip_code)
   end
 
   def self.create_profile(array)
     array.collect! do |restaurant|
-      # binding.pry
       "#{restaurant.name} #{restaurant.address} ph #{restaurant.phone_num} #{restaurant.get_violations}"
-      # restaurant.name
-      # restaurant.address
-      # restaurant.phone
-      # restaurant.get_violations
     end
   end
 
@@ -57,27 +49,32 @@ class Restaurant < ActiveRecord::Base
     @address
   end
 
-  def self.worst_restaurant_in_zip(zip_code)
-    r_arr = Restaurant.zip_list(zip_code)
-    worst = r_arr.first
-    r_arr.each do |r|
-      worst = r if r.score > worst.score
+  def self.worst_restaurant_in_zip(zip_code, num=1)
+    r = Restaurant.zip_list(zip_code).sort do |a,b|
+      if a.score == nil
+        1
+      elsif b.score == nil
+        -1
+      else
+        b.score <=> a.score
+      end
     end
-    worst
+
+    if num == 1
+      r.first
+    else
+      r[0,num]
+    end
   end
 
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
     f.gets
     while line = f.gets
-      # begin
-        components = line.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub("\"", "").split(",")
-      # rescue ArgumentError
-      #   return true
-      # end
+      components = line.force_encoding('ISO-8859-1').encode('utf-8', replace: nil).gsub("\"", "").split(",")
 
       next if !VALID_LETTERS.include?(components[12])
-      next if components[5].length != 5 # Come back to this zip code
+      next if components[5].length != 5
       next if Restaurant.exists?(phone: components[6].to_i)
       
       r = Restaurant.create
@@ -94,16 +91,3 @@ class Restaurant < ActiveRecord::Base
     f.close
   end
 end
-
-      # t.string :name
-      # t.integer :building_number
-      # t.string :street_name
-      # t.integer :zip
-      # t.integer :phone
-      # t.integer :cuisinecode
-      # t.integer :vio_code
-      # t.integer :score
-      # t.string :grade
-
-# "CAMIS","DBA","BORO","BUILDING","STREET","ZIPCODE","PHONE","CUISINECODE",
-# "INSPDATE","ACTION","VIOLCODE","SCORE","CURRENTGRADE","GRADEDATE","RECORDDATE"
