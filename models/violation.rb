@@ -1,6 +1,6 @@
 class Violation < ActiveRecord::Base
-
-  has_many :violations, through: :restaurants_violations
+  has_many :restaurant_violations
+  has_many :restaurants, through: :restaurant_violations
   
   def self.seed
     f = File.new("./textfiles/Violation.txt", 'r')

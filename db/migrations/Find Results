@@ -1,0 +1,15 @@
+Searching 33 files for "restaurantsviolation"
+
+/Users/asullivan210/flatiron/meetup/meetup/db/migrations/03_create_restaurants_violations.rb:
+    1: class CreateRestaurantsViolations < ActiveRecord::Migration
+    2    def change
+    3      # drop_table :restaurant_violations
+
+/Users/asullivan210/flatiron/meetup/meetup/models/restaurant.rb:
+   15  
+   16    # def get_violations
+   17:   #   violation_id_array = RestaurantViolation.where(restaurant_id: self.id)
+   18    #   violation_id_array.collect! do |v|
+   19    #     v.violation_id
+
+2 matches across 2 files
