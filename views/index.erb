@@ -33,13 +33,18 @@
     margin: 30px auto;
     width: 590px;
   }
+
+  #error {
+    color: red;
+  }
   </style>
 </head>
 <body>
-  <h1><%=@message%></h1>
   <img src="/img/yelp_logo.jpg" alt="Our logo">
   <p> More information </p>
+  <h2 id="error" ><%= @error ? "INVALID OR UNKNOWN ZIP CODE!  TRY AGAIN!" : "" %></h2> 
   <%= erb :form %>
+
 <!--   <form action='/' method="POST">
     <label for="zip">In what zip code are you eating?</label><br />
     <input type="text" id ="zip" name="zip" placeholder="Zipcode"><br />
