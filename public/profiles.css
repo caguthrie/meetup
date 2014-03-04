@@ -29,6 +29,9 @@
       margin: 10px auto;
       text-align: center;
     }
+    h1 {
+      color: red;
+    }
     ._page {
       margin: 0 auto;
       width: 40%;
