@@ -1,0 +1,22 @@
+<% v = Violation.find_by(id: @vio_id) %>
+<html>
+  <head>
+    <title>
+      <%= "#{v.vio_code}" %>
+    </title>
+  </head>
+    <body>
+    <div id="main_list">
+      <h2><%= v.vio_code %></h2>
+      <h3><%= v.description %></h3>
+      <% if v.critical_vio == true %>
+      <h3>This violation is critical</h3>
+      <% end %>
+      <ul>
+        <% v.restaurants.each do |rest| %>
+          <li><%= rest.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </body>
+</html>

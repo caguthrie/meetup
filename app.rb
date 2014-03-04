@@ -21,6 +21,15 @@ class RestaurantApp < Sinatra::Base
     end
   end
 
+  get '/violation/:vio_id' do
+    @vio_id = params[:vio_id]
+    if Violation.exists?(id: @vio_id)
+      erb :vio_page
+    else
+      redirect to("/")
+    end
+  end
+
   def post_up(p)
     @zip_url = p.to_i
     @worst = Restaurant.worst_restaurant_in_zip(@zip_url, 3)
