@@ -1,7 +1,7 @@
 class RestaurantViolation < ActiveRecord::Base
 
-  belongs_to :restaurants
-  belongs_to :violations
+  belongs_to :restaurant
+  belongs_to :violation
 
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
@@ -20,16 +20,16 @@ class RestaurantViolation < ActiveRecord::Base
       
       next if !Restaurant.exists?(phone: components[6])
       next if !Violation.exists?(vio_code: components[10])
-      rv_array = RestaurantViolation.where(rest_id: Restaurant.find_by(phone: components[6]).id)
+      rv_array = RestaurantViolation.where(restaurant_id: Restaurant.find_by(phone: components[6]).id)
       found_dupe = false
       rv_array.each do |rv|
-        found_dupe = true if rv.vio_id == Violation.find_by(vio_code: components[10]).id
+        found_dupe = true if rv.violation_id == Violation.find_by(vio_code: components[10]).id
       end
       next if found_dupe
 
       join = RestaurantViolation.create
-      join.rest_id = Restaurant.find_by(phone: components[6]).id 
-      join.vio_id = Violation.find_by(vio_code: components[10]).id 
+      join.restaurant_id = Restaurant.find_by(phone: components[6]).id 
+      join.violation_id = Violation.find_by(vio_code: components[10]).id 
       join.save
     end
     f.close

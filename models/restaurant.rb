@@ -1,6 +1,6 @@
 class Restaurant < ActiveRecord::Base
-
-  has_many :violations, through: :restaurants_violations
+  has_many :restaurant_violations
+  has_many :violations, through: :restaurant_violations
   has_one :cuisines
 
   VALID_LETTERS = ["B","C","Z"]
@@ -13,31 +13,31 @@ class Restaurant < ActiveRecord::Base
   #   self.cuisinecode.cuisine_description
   # end
 
-  def get_violations
-    vio_id_array = RestaurantViolation.where(rest_id: self.id)
-    vio_id_array.collect! do |v|
-      v.vio_id
-    end
-    vio_id_array.collect! do |vio_id|
-      Violation.where(id: vio_id)
-    end
-    vio_id_array.collect! do |violation|
-      violation.first.description
-    end
-  end
+  # def get_violations
+  #   violation_id_array = RestaurantViolation.where(restaurant_id: self.id)
+  #   violation_id_array.collect! do |v|
+  #     v.violation_id
+  #   end
+  #   violation_id_array.collect! do |violation_id|
+  #     Violation.where(id: violation_id)
+  #   end
+  #   violation_id_array.collect! do |violation|
+  #     violation.first.description
+  #   end
+  # end
 
-  def get_vio_code
-    vio_id_array = RestaurantViolation.where(rest_id: self.id)
-    vio_id_array.collect! do |v|
-      v.vio_id
-    end
-    vio_id_array.collect! do |vio_id|
-      Violation.where(id: vio_id)
-    end
-    vio_id_array.collect! do |violation|
-      violation.first.vio_code
-    end
-  end
+  # def get_vio_code
+  #   violation_id_array = RestaurantViolation.where(restaurant_id: self.id)
+  #   violation_id_array.collect! do |v|
+  #     v.violation_id
+  #   end
+  #   violation_id_array.collect! do |violation_id|
+  #     Violation.where(id: violation_id)
+  #   end
+  #   violation_id_array.collect! do |violation|
+  #     violation.first.vio_code
+  #   end
+  # end
 
   def self.zip_list(zip_code)
     Restaurant.where(zip: zip_code)
