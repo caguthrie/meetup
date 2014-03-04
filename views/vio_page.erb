@@ -1,6 +1,8 @@
 <% v = Violation.find_by(id: @vio_id) %>
 <html>
   <head>
+     <link href='/profiles.css' rel='stylesheet' type='text/css'>
+  </head>
     <title>
       <%= "#{v.vio_code}" %>
     </title>
@@ -12,6 +14,7 @@
       <% if v.critical_vio == true %>
       <h3>This violation is critical</h3>
       <% end %>
+      <h2>Restaurants with this violation</h2>
       <ul>
         <% v.restaurants.each do |rest| %>
           <li><%= rest.name %></li>
