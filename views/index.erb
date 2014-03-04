@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+  span {
+    color: red;
+  }
+  </style>
+</head>
 <body>
+  <h1> <span><%= @message %> </span></h1>
   <h1>Title Restaurant stuff</h1>
   <p> More information </p>
-  <form action='/params[:ziparg]'>
+  <form action='/' method = "POST">
     <label for="ziparg">Where are you eating?</label> 
     <input type="text" name="ziparg" id="ziparg" value="Your zip code here.">
   </form>

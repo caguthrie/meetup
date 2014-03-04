@@ -1,6 +1,6 @@
 class Cuisine < ActiveRecord::Base
 
-  belongs_to :restaurants
+  has_many :restaurants
   
   def self.seed
     f = File.new("./textfiles/Cuisine.txt", 'r')
@@ -11,7 +11,7 @@ class Cuisine < ActiveRecord::Base
       # next if Violation.find_by vio_code: components[3] != nil
       c = Cuisine.create
       c.cuisinecode = components[0]
-      c.cuisine_description = components[1]
+      c.cuisine_description = components[1].gsub("\r\n", "")
       c.save
     end
     f.close

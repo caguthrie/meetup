@@ -1,5 +1,5 @@
 class Violation < ActiveRecord::Base
-
+  has_many :restaurants_violations
   has_many :violations, through: :restaurants_violations
   
   def self.seed

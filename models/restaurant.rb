@@ -1,42 +1,13 @@
 class Restaurant < ActiveRecord::Base
-
+  has_many :restaurants_violations
   has_many :violations, through: :restaurants_violations
-  has_one :cuisines
-
+  has_many :restaurants_cuisines
+  has_many :cuisines, through: :restaurants_cuisines
+  
   VALID_LETTERS = ["B","C","Z"]
 
   def phone_num
     self.phone.to_s.strip.split('').insert(3, "-").insert(7, "-").join()
-  end
-
-  # def cuisine_info
-  #   self.cuisinecode.cuisine_description
-  # end
-
-  def get_violations
-    vio_id_array = RestaurantViolation.where(rest_id: self.id)
-    vio_id_array.collect! do |v|
-      v.vio_id
-    end
-    vio_id_array.collect! do |vio_id|
-      Violation.where(id: vio_id)
-    end
-    vio_id_array.collect! do |violation|
-      violation.first.description
-    end
-  end
-
-  def get_vio_code
-    vio_id_array = RestaurantViolation.where(rest_id: self.id)
-    vio_id_array.collect! do |v|
-      v.vio_id
-    end
-    vio_id_array.collect! do |vio_id|
-      Violation.where(id: vio_id)
-    end
-    vio_id_array.collect! do |violation|
-      violation.first.vio_code
-    end
   end
 
   def self.zip_list(zip_code)
@@ -48,12 +19,7 @@ class Restaurant < ActiveRecord::Base
 
   def self.create_profile(array)
     array.collect! do |restaurant|
-      # binding.pry
       "#{restaurant.name} #{restaurant.address} ph #{restaurant.phone_num} #{restaurant.get_violations}"
-      # restaurant.name
-      # restaurant.address
-      # restaurant.phone
-      # restaurant.get_violations
     end
   end
 
@@ -94,15 +60,3 @@ class Restaurant < ActiveRecord::Base
   end
 end
 
-      # t.string :name
-      # t.integer :building_number
-      # t.string :street_name
-      # t.integer :zip
-      # t.integer :phone
-      # t.integer :cuisinecode
-      # t.integer :vio_code
-      # t.integer :score
-      # t.string :grade
-
-# "CAMIS","DBA","BORO","BUILDING","STREET","ZIPCODE","PHONE","CUISINECODE",
-# "INSPDATE","ACTION","VIOLCODE","SCORE","CURRENTGRADE","GRADEDATE","RECORDDATE"

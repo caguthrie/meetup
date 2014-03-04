@@ -5,20 +5,23 @@ class RestaurantApp < Sinatra::Base
   end
 
   post '/' do
-    @zip_arg = params[:ziparg]
-    redirect "/#{@zip_arg}"
+    @ziparg = params["ziparg"]
+    redirect to("/#{@ziparg}")
     erb :index
   end
 
   get '/:zip_url' do
     @zip_url = params[:zip_url].to_i
-    # binding.pry
     if !Restaurant.exists?(zip: @zip_url)
-      erb :no_zip
+      @message = "Error, invalid zipcode"
+      redirect to("/")
     else
+      @message = ""
       erb :zip_page
     end
   end
 
-
+  post '/no-zip' do
+    erb :no_zip
+  end
 end
