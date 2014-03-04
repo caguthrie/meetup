@@ -10,7 +10,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      background-color: lightgrey;
+      background-color: white;
       border-radius: 20px;
       border: 3px dotted black;
       margin: 20px;
@@ -41,7 +41,7 @@
       clear: left;
 
     }
-  </style>
+</style>
   <% coords1 = Geocoder.coordinates(@worst[0].address) %>
   <% coords2 = Geocoder.coordinates(@worst[1].address) %>
   <% coords3 = Geocoder.coordinates(@worst[2].address) %>
@@ -116,7 +116,7 @@
     <h1 id="map_caption">Disgusting restaurants for zip code <%=@zip_url%></h1>
   </div>
 <div id="links">
-  <h3>Local Restaurants</h3>
+  <h3>Find by Name</h3>
   <% Restaurant.zip_list(@zip_url).sort {|a,b| a.name <=> b.name}.each do |r| %>
   <a href="#<%= r.name %>"><%= r.name %></a><br>
   <% end %>
