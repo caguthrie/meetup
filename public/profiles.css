@@ -55,3 +55,10 @@
       clear: left;
 
     }
+    .bold {
+      font-weight: bold;
+    }
+    }
+    img {
+      border: 1px solid black;
+    }

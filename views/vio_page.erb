@@ -15,10 +15,14 @@
       <h3>This violation is critical</h3>
       <% end %>
       <h2>Restaurants with this violation</h2>
-      <ul>
-        <% v.restaurants.each do |rest| %>
-          <li><%= rest.name %></li>
-        <% end %>
+      <% hash = v.restaurants.group_by {|r| r.zip} %>
+      <% hash.sort.each do |k, v|%>
+      <br/>
+      <span class= "bold"><%= k %><br/></span>
+        <%v.each do |r|%>
+          <%=r.name%><br/>
+        <%end%>
+      <%end%>
       </ul>
     </div>
   </body>
