@@ -8,8 +8,46 @@
   <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALUMEVvLlZ-4U2LSSVm3LhwtjbIO223qY&sensor=false">
   </script>    
+  </script>
+  <% bad_r = Restaurant.find_by(id: @rest_id) %>
+  <% coords1 = Geocoder.coordinates(bad_r.address) %>
+
+  <script type="text/javascript">
+
+      function initialize() {
+
+        var ll_worst1 = new google.maps.LatLng(<%=coords1[0]%>, <%=coords1[1]%>);
+
+        var worst_string1 = "<%= "<h3>#{bad_r.name}</h3>#1 worst in #{bad_r.zip}<br><br>Extra 'flavor' with every meal!<p>" %>";
+
+        var worst_info1 = new google.maps.InfoWindow({
+          content: worst_string1
+        });
+
+        var mapOptions = {
+          center: new google.maps.LatLng(<%=coords1[0]%>, <%=coords1[1]%>),
+          zoom: 15
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+        var marker_worst1 = new google.maps.Marker({
+          position: ll_worst1,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          title: "#1 Worst Restaurant"
+        }); 
+ 
+
+        google.maps.event.addListener(marker_worst1, 'click', function() {
+          worst_info1.open(map,marker_worst1);
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
   </head>
     <body>
+    <div id="map-canvas"></div>
     <div class="rest_page">
       <h2><%= r.name %></h2>
       <h3><%= r.phone_num %></h3>
