@@ -4,7 +4,7 @@ class RestaurantApp < Sinatra::Base
 
   get '/' do
     session[:error] ? @error = true : @error = false
-    session[:error] = nil
+    session[:error] = false
     erb :index
   end
 
@@ -19,10 +19,10 @@ class RestaurantApp < Sinatra::Base
   get '/restaurant/:rest_id' do
     @rest_id = params[:rest_id]
     if Restaurant.exists?(id: @rest_id)
-      session[:error] = nil
+      session[:error] = false
       erb :rest_page
     else
-      session[:error] = :error
+      session[:error] = true
       redirect to("/")
     end
   end
@@ -30,10 +30,10 @@ class RestaurantApp < Sinatra::Base
   get '/violation/:vio_id' do
     @vio_id = params[:vio_id]
     if Violation.exists?(id: @vio_id)
-      session[:error] = nil
+      session[:error] = false
       erb :vio_page
     else
-      session[:error] = :error
+      session[:error] = true
       redirect to("/")
     end
   end
@@ -42,10 +42,10 @@ class RestaurantApp < Sinatra::Base
     @zip_url = p.to_i
     @worst = Restaurant.worst_restaurant_in_zip(@zip_url, 3)
     if !Restaurant.exists?(zip: @zip_url)
-      session[:error] = :error
+      session[:error] = true
       redirect to("/")
     else
-      session[:error] = nil
+      session[:error] = false
       erb :zip_page
     end
   end
