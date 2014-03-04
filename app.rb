@@ -4,6 +4,7 @@ class RestaurantApp < Sinatra::Base
 
   get '/' do
     session[:error] ? @error = true : @error = false
+    session[:error] = nil
     erb :index
   end
 
