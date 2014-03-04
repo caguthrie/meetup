@@ -1,7 +1,6 @@
 class RestaurantApp < Sinatra::Base
 
   get '/' do
-    @message = @@message
     erb :index
   end
 
@@ -17,10 +16,8 @@ class RestaurantApp < Sinatra::Base
     @zip_url = p.to_i
     @worst = Restaurant.worst_restaurant_in_zip(@zip_url, 3)
     if !Restaurant.exists?(zip: @zip_url)
-      @@message = "Error, invalid zipcode!"
-      redirect to{"/"}
+      redirect to("/")
     else
-      @@message = ""
       erb :zip_page
     end
   end
