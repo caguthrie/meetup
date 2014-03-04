@@ -5,6 +5,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALUMEVvLlZ-4U2LSSVm3LhwtjbIO223qY&sensor=false">
   </script>
   <style>
+    body { background-color: #EDFFF3; }
     #map-canvas { height: 400px; width: 600px }
     #map-canvas img{ max-width: none; }
   </style>
@@ -78,13 +79,24 @@
 </head>
 <body>
   <div id="map-canvas"></div>
-  <h1>Checking zip code <%=@zip_url%></h1>
-  <p> List: </p>
+  <h1>Disgusting restaurants for zip code <%=@zip_url%></h1>
 
-  <% Restaurant.zip_list(@zip_url).each do |r| %>
-  <h2><%= r.name %></h2>
+  <% Restaurant.zip_list(@zip_url).sort {|a,b| a.name <=> b.name}.each do |r| %>
+  <a href="#<%= r.name %>"><%= r.name %></a><br>
+  <% end %>
+
+  <% Restaurant.zip_list(@zip_url).sort {|a,b| b.score <=> a.score}.each do |r| %>
+  <h2 id="<%= r.name %>"><%= r.name %></h2>
   <h3><%= r.phone_num %></h3>
   <h3><%= r.address %></h3>
+  <h3>Violation points: <%= r.score %></h3>
+  <h3>Grade: <%= 
+    if r.grade != "Z"
+      r.grade
+    else
+      "Pending"
+    end %>
+  </h3>
   <ol>
     <% r.get_violations.each do |vio| %>
       <li><%= vio %></li>
