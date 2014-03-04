@@ -6,8 +6,41 @@
   </script>
   <style>
     body { background-color: #EDFFF3; }
-    #map-canvas { height: 400px; width: 600px }
+    #links {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: lightgrey;
+      border-radius: 20px;
+      border: 3px dotted black;
+      margin: 20px;
+      padding: 15px;
+      text-align: center;
+
+    }
+    #map-canvas { 
+      height: 400px; 
+      width: 600px;
+      float: left;
+      border: 2px solid black;
+      display: block;
+    }
     #map-canvas img{ max-width: none; }
+    #map_caption {
+      float: left;
+      clear: left;
+      margin: 10px;
+    }
+    #links a {
+      text-decoration: none;
+      color: black;
+      line-height: 1.3em;
+    }
+    #main_list {
+      width: 800px;
+      clear: left;
+
+    }
   </style>
   <% coords1 = Geocoder.coordinates(@worst[0].address) %>
   <% coords2 = Geocoder.coordinates(@worst[1].address) %>
@@ -78,13 +111,18 @@
   </script>
 </head>
 <body>
-  <div id="map-canvas"></div>
-  <h1>Disgusting restaurants for zip code <%=@zip_url%></h1>
-
+  <div id="map">
+    <div id="map-canvas"></div>
+    <h1 id="map_caption">Disgusting restaurants for zip code <%=@zip_url%></h1>
+  </div>
+<div id="links">
+  <h3>Local Restaurants</h3>
   <% Restaurant.zip_list(@zip_url).sort {|a,b| a.name <=> b.name}.each do |r| %>
   <a href="#<%= r.name %>"><%= r.name %></a><br>
   <% end %>
+</div>
 
+<div id="main_list">
   <% Restaurant.zip_list(@zip_url).sort {|a,b| b.score <=> a.score}.each do |r| %>
   <h2 id="<%= r.name %>"><%= r.name %></h2>
   <h3><%= r.phone_num %></h3>
@@ -103,6 +141,6 @@
     <% end %>
   </ol>
   <% end %>
-
+</div>
 </body>
 </html>
