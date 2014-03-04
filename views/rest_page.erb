@@ -1,20 +1,24 @@
 <% r=Restaurant.find_by(id: @rest_id) %>
 <html>
   <head>
-    <style>
-    form {float: right;}
-    </style>
+ <link href='/profiles.css' rel='stylesheet' type='text/css'>
     <title>
       <%= "#{r.name} -- HELP! Bad Restaurants in New York City" %>
     </title>
   </head>
     <body>
-    <div id="main_list">
+    <div class="rest_page">
       <h2><%= r.name %></h2>
       <h3><%= r.phone_num %></h3>
       <h3><%= r.address %></h3>
+      <% r.cuisines.each do |c| %>
+      <h3><%= c.description %></h3>
+      <% end %>
+    </div>
+    <br/>
+    <div class="violation_list">
       <h3>Violation points: <%= r.score %></h3>
-      <h3>Grade: <%= 
+      <h3><%= 
         if r.grade == "B"
           "<img src=\"/img/b.jpg\">"
         elsif r.grade == "C"
@@ -28,9 +32,10 @@
           <li><a href="/violation/<%=vio.id%>"><%= vio.description %></a></li>
         <% end %>
       </ol>
-      <div id="form">
-          <%= erb :form %>
-      </div>
     </div>
+
+      <div id="form">
+        <%= erb :form %>
+      </div>
   </body>
 </html>

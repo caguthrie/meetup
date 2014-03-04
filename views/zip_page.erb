@@ -1,47 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href='/profiles.css' rel='stylesheet' type='text/css'>
   <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALUMEVvLlZ-4U2LSSVm3LhwtjbIO223qY&sensor=false">
   </script>
-  <style>
-    body { background-color: #EDFFF3; }
-    #links {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: white;
-      border-radius: 20px;
-      border: 3px dotted black;
-      margin: 20px;
-      padding: 15px;
-      text-align: center;
-
-    }
-    #map-canvas { 
-      height: 400px; 
-      width: 600px;
-      float: left;
-      border: 2px solid black;
-      display: block;
-    }
-    #map-canvas img{ max-width: none; }
-    #map_caption {
-      float: left;
-      clear: left;
-      margin: 10px;
-    }
-    #links a {
-      text-decoration: none;
-      color: black;
-      line-height: 1.3em;
-    }
-    #main_list {
-      width: 800px;
-      clear: left;
-
-    }
-</style>
   <% coords1 = Geocoder.coordinates(@worst[0].address) %>
   <% coords2 = Geocoder.coordinates(@worst[1].address) %>
   <% coords3 = Geocoder.coordinates(@worst[2].address) %>
@@ -127,6 +90,9 @@
   <h2 id="<%= r.name %>"><%= r.name %></h2>
   <h3><%= r.phone_num %></h3>
   <h3><%= r.address %></h3>
+  <% r.cuisines.each do |c| %>
+    <h3><%= c.description %></h3>
+  <% end %>
   <h3>Violation points: <%= r.score %></h3>
   <h3><%= 
     if r.grade == "B"
@@ -138,8 +104,8 @@
     end %>
   </h3>
   <ol>
-    <% r.get_violations.each do |vio| %>
-      <li><%= vio %></li>
+    <% r.violations.each do |vio| %>
+      <li><a href="/violation/<%=vio.id%>"><%= vio.description %></a></li>
     <% end %>
   </ol>
   <% end %>
