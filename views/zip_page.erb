@@ -79,7 +79,8 @@
     <h1 id="map_caption">Disgusting restaurants for zip code <%=@zip_url%></h1>
   </div>
 <div id="links">
-  <h3>Find by Name</h3>
+  <%= erb :form %>
+  <h3>Find by Name in <%= @zip_url %></h3>
   <% Restaurant.zip_list(@zip_url).sort {|a,b| a.name <=> b.name}.each do |r| %>
   <a href="<%= "/restaurant/#{r.id}" %>"><%= r.name %></a><br>
   <% end %>
@@ -93,7 +94,6 @@
   <% r.cuisines.each do |c| %>
     <h3><%= c.description %></h3>
   <% end %>
-  <h3>Violation points: <%= r.score %></h3>
   <h3><%= 
     if r.grade == "B"
       "<img src=\"/img/b.jpg\">"
@@ -102,12 +102,13 @@
     else
       "<img src=\"/img/pending.jpg\">"
     end %>
+    Violation points: <%= r.score %>
   </h3>
   <ol>
     <% r.violations.each do |vio| %>
       <li><a href="/violation/<%=vio.id%>"><%= vio.description %></a></li>
     <% end %>
-  </ol>
+  </ol><br>
   <% end %>
 </div>
 </body>
