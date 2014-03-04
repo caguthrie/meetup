@@ -28,3 +28,6 @@
     margin: 30px auto;
     width: 590px;
   }
+  #error {
+    color: red;
+  }
