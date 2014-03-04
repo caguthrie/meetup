@@ -1,7 +1,9 @@
 class Restaurant < ActiveRecord::Base
   has_many :restaurant_violations
   has_many :violations, through: :restaurant_violations
-  has_one :cuisines
+  has_many :restaurant_cuisines
+  has_many :cuisines, through: :restaurant_cuisines
+
 
   VALID_LETTERS = ["B","C","Z"]
 

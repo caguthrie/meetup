@@ -1,6 +1,9 @@
 <% r=Restaurant.find_by(id: @rest_id) %>
 <html>
   <head>
+    <style>
+    form {float: right;}
+    </style>
     <title>
       <%= "#{r.name} -- HELP! Bad Restaurants in New York City" %>
     </title>
@@ -25,6 +28,9 @@
           <li><a href="/violation/<%=vio.id%>"><%= vio.description %></a></li>
         <% end %>
       </ol>
+      <div id="form">
+          <%= erb :form %>
+      </div>
     </div>
   </body>
 </html>

@@ -37,12 +37,13 @@
 </head>
 <body>
   <h1><%=@message%></h1>
-  <h1>Title Restaurant stuff</h1>
+  <img src="/img/yelp_logo.jpg" alt="Our logo">
   <p> More information </p>
-  <form action='/' method="POST">
+  <%= erb :form %>
+<!--   <form action='/' method="POST">
     <label for="zip">In what zip code are you eating?</label><br />
     <input type="text" id ="zip" name="zip" placeholder="Zipcode"><br />
-  </form>
+  </form> -->
 
 </body>
 </html>
