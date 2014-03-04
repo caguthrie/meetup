@@ -48,6 +48,9 @@
   </head>
     <body>
     <div id="map-canvas"></div>
+
+      <%= erb :form %>
+
     <div class="rest_page">
       <h2><%= r.name %></h2>
       <h3><%= r.phone_num %></h3>
@@ -75,8 +78,6 @@
       </ol>
     </div>
 
-      <div id="form">
-        <%= erb :form %>
-      </div>
+
   </body>
 </html>
