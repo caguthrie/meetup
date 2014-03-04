@@ -38,6 +38,17 @@ class RestaurantApp < Sinatra::Base
     end
   end
 
+  get '/cuisine/:cuis_id' do
+    @cuis_id = params[:cuis_id]
+    if Cuisine.exists?(id: @cuis_id)
+      session[:error] = false
+      erb :cuis_page
+    else
+      session[:error] = true
+      redirect to("/")
+    end
+  end
+
   def post_up(p)
     @zip_url = p.to_i
     @worst = Restaurant.worst_restaurant_in_zip(@zip_url, 3)

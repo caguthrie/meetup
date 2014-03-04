@@ -15,7 +15,7 @@
       <h3><%= r.phone_num %></h3>
       <h3><%= r.address %></h3>
       <% r.cuisines.each do |c| %>
-      <h3><%= c.description %></h3>
+      <a href="/cuisine/<%=c.id%>"><h3><%= c.description %></h3></a>
       <% end %>
     </div>
     <br/>
