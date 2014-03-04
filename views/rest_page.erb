@@ -1,0 +1,30 @@
+<% r=Restaurant.find_by(id: @rest_id) %>
+<html>
+  <head>
+    <title>
+      <%= "#{r.name} -- HELP! Bad Restaurants in New York City" %>
+    </title>
+  </head>
+    <body>
+    <div id="main_list">
+      <h2><%= r.name %></h2>
+      <h3><%= r.phone_num %></h3>
+      <h3><%= r.address %></h3>
+      <h3>Violation points: <%= r.score %></h3>
+      <h3>Grade: <%= 
+        if r.grade == "B"
+          "<img src=\"/img/b.jpg\">"
+        elsif r.grade == "C"
+          "<img src=\"/img/c.jpg\">"
+        else
+          "<img src=\"/img/pending.jpg\">"
+        end %>
+      </h3>
+      <ol>
+        <% r.get_violations.each do |vio| %>
+          <li><%= vio %></li>
+        <% end %>
+      </ol>
+    </div>
+  </body>
+</html>

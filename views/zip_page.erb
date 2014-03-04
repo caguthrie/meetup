@@ -118,7 +118,7 @@
 <div id="links">
   <h3>Find by Name</h3>
   <% Restaurant.zip_list(@zip_url).sort {|a,b| a.name <=> b.name}.each do |r| %>
-  <a href="#<%= r.name %>"><%= r.name %></a><br>
+  <a href="<%= "/restaurant/#{r.id}" %>"><%= r.name %></a><br>
   <% end %>
 </div>
 
@@ -129,10 +129,12 @@
   <h3><%= r.address %></h3>
   <h3>Violation points: <%= r.score %></h3>
   <h3>Grade: <%= 
-    if r.grade != "Z"
-      r.grade
+    if r.grade == "B"
+      "<img src=\"/img/b.jpg\">"
+    elsif r.grade == "C"
+      "<img src=\"/img/c.jpg\">"
     else
-      "Pending"
+      "<img src=\"/img/pending.jpg\">"
     end %>
   </h3>
   <ol>
