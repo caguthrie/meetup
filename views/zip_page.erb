@@ -4,13 +4,14 @@
   <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALUMEVvLlZ-4U2LSSVm3LhwtjbIO223qY&sensor=false">
   </script>
-  <style>
+  <!-- <link rel="stylesheet" type="text/css" href="zip_page.css"> -->
+<style>
     body { background-color: #EDFFF3; }
     #links {
       position: absolute;
       top: 20px;
       right: 20px;
-      background-color: lightgrey;
+      background-color: white;
       border-radius: 20px;
       border: 3px dotted black;
       margin: 20px;
@@ -41,7 +42,7 @@
       clear: left;
 
     }
-  </style>
+</style>
   <% coords1 = Geocoder.coordinates(@worst[0].address) %>
   <% coords2 = Geocoder.coordinates(@worst[1].address) %>
   <% coords3 = Geocoder.coordinates(@worst[2].address) %>
