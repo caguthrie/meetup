@@ -8,14 +8,18 @@
     </title>
   </head>
     <body>
+    <div class="vio_form">
+      <%= erb :form %>
+    </div>
     <div class="_page">
       <h2>Violation <%= v.vio_code %></h2>
       <h3><%= v.description %></h3>
       <% if v.critical_vio == true %>
       <h3>This violation is critical</h3>
       <% end %>
-      </div>
-      <div class="_list">
+    </div>
+    <div class="_list">
+
       <h2>Restaurants with this violation</h2>
       <% hash = v.restaurants.group_by {|r| r.zip} %>
       <% hash.sort.each do |k, v|%>
@@ -27,6 +31,8 @@
       <%end%>
       </ul>
     </div>
+
+
     
   </body>
 </html>

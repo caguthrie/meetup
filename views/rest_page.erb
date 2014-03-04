@@ -20,7 +20,7 @@
     </div>
     <br/>
     <div class="_list">
-      <h3>Violation points: <%= r.score %></h3>
+      
       <h3><%= 
         if r.grade == "B"
           "<img src=\"/img/b.jpg\">"
@@ -29,6 +29,7 @@
         else
           "<img src=\"/img/pending.jpg\">"
         end %>
+        Violation points: <%= r.score %>
       </h3>
       <ol>
         <% r.violations.each do |vio| %>
