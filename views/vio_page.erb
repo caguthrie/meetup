@@ -4,26 +4,29 @@
      <link href='/profiles.css' rel='stylesheet' type='text/css'>
   </head>
     <title>
-      <%= "#{v.vio_code}" %>
+      <%="#{v.vio_code}" %>
     </title>
   </head>
     <body>
-    <div id="main_list">
-      <h2><%= v.vio_code %></h2>
+    <div class="_page">
+      <h2>Violation <%= v.vio_code %></h2>
       <h3><%= v.description %></h3>
       <% if v.critical_vio == true %>
       <h3>This violation is critical</h3>
       <% end %>
+      </div>
+      <div class="_list">
       <h2>Restaurants with this violation</h2>
       <% hash = v.restaurants.group_by {|r| r.zip} %>
       <% hash.sort.each do |k, v|%>
       <br/>
-      <span class= "bold"><%= k %><br/></span>
+      <span class= "bold"><a href="/<%=k%>"><%= k %></a><br/></span>
         <%v.each do |r|%>
-          <%=r.name%><br/>
+          <a href="/restaurant/<%=r.id%>"><%=r.name%></a><br/>
         <%end%>
       <%end%>
       </ul>
     </div>
+    
   </body>
 </html>

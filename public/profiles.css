@@ -17,19 +17,19 @@
       display: inline-block;
       background: white;
     }
-    .rest_page {
+    ._page {
       margin: 0 auto;
-      width: 30%;
+      width: 40%;
       background-color: white;
       border-radius: 20px;
       border: 3px dotted black;
       text-align: center;
     }
-    .violation_list {
+    ._list {
       margin: 0 auto;
       width: 75%;
     }
-    .rest_page ol {
+    ._page ol {
       text-align: left;
     }
     #map-canvas { 
