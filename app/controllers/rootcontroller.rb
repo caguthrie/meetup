@@ -7,7 +7,7 @@ class RootController < AppController
   end
 
   post '/' do
-    post_up(params["zip"])
+    redirect to("/#{params[:zip]}")
   end
 
   get '/:zip_url' do
@@ -25,7 +25,5 @@ class RootController < AppController
       erb :zip_page
     end
   end
-
-
 
 end
