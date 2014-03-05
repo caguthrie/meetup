@@ -54,7 +54,7 @@
     <div class="_page rest_prof">
       <h2><%= r.name %></h2>
       <h3><%= r.phone_num %></h3>
-      <h3><%= r.address %></h3>
+      <a href="/<%= r.zip %>"><h3><%= r.address %></h3></a>
       <% r.cuisines.each do |c| %>
       <a href="/cuisine/<%=c.id%>"><h3><%= c.description %></h3></a>
       <% end %>
