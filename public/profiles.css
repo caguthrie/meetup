@@ -49,6 +49,7 @@
     ._list {
       margin: 0 auto;
       width: 75%;
+      line-height: 1.3em;
     }
     .rest_list {
       float: left;
