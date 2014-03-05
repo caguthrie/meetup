@@ -1,6 +1,11 @@
 # config.ru
 require './config/environment'
 
-run RestaurantApp
+use RootController
+use ViolationController
+use RestaurantController
+use CuisineController
+
+run AppController
 
 $stdout.sync = true

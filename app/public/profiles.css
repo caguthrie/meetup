@@ -1,0 +1,92 @@
+ body { background-color: #EDFFF3; }
+
+    #links {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      border-radius: 20px;
+      border: 3px dotted black;
+      margin: 20px;
+      padding: 15px;
+      text-align: center;
+    }
+    img {
+      border: 1px solid black;
+    }
+    .rest_form {
+      float:right;
+      margin-right:100px;
+
+    }
+    .rest_prof {
+      float: left;
+      margin: 20px;
+    }
+
+    #form {
+      border: 2px solid black;
+      padding: 10px;
+      width: 20%;
+      margin: 10px auto;
+      background: white;
+      text-align: center;
+    }
+    .vio_form {
+      padding: 10px;
+      width: 20%;
+      margin: 10px auto;
+      text-align: center;
+    }
+    .red {
+      color: red;
+    }
+    ._page {
+      margin: 0 auto;
+      width: 40%;
+      background-color: white;
+      border-radius: 20px;
+      border: 3px dotted black;
+      text-align: center;
+    }
+    ._list {
+      margin: 0 auto;
+      width: 75%;
+    }
+    .rest_list {
+      float: left;
+    }
+    ._page ol {
+      text-align: left;
+    }
+    #map-canvas { 
+      height: 400px; 
+      width: 600px;
+      float: left;
+      border: 2px solid black;
+      display: block;
+      margin-right: 50px;
+    }
+    #map-canvas img{ max-width: none; }
+    #map_caption {
+      float: left;
+      clear: left;
+      margin: 10px;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      line-height: 1.3em;
+    }
+    #main_list {
+      width: 800px;
+      clear: left;
+
+    }
+    .bold {
+      font-weight: bold;
+    }
+    }
+    img {
+      border: 1px solid black;
+    }

@@ -1,0 +1,33 @@
+* {
+    font: 18px Georgia;
+    text-align: center;
+  }
+  form {
+    border: 1px solid black;
+    box-shadow: 5px, 5px, 3px, grey;
+    padding: 20px 40px;
+    background-color: #EDFFF3;
+    display: inline-block;
+  }
+  input#zip {
+    border-style: inset;
+    border-width: 3px;
+    border-color: #167A38;
+    padding: 3px;
+    margin: 5px;
+  }
+  span {
+    color: red;
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 36px;
+    font-family: 'Diplomata SC', cursive;
+  }
+  p {
+    margin: 30px auto;
+    width: 590px;
+  }
+  #error {
+    color: red;
+  }

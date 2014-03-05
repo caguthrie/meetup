@@ -2,15 +2,8 @@ require 'bundler/setup'
 require 'pry'
 Bundler.require(:default) 
 
-require_relative '../models/restaurant_cuisine'
-require_relative '../models/cuisine'
-require_relative '../models/restaurant'
-require_relative '../models/violation'
-require_relative '../models/restaurant_violation'
-require_relative '../spec/restaurant_violation_spec.rb'
-require_relative '../spec/restaurant_spec.rb'
-require_relative '../spec/violation_spec.rb'
-require_relative '../app'
+Dir[File.join(File.dirname(__FILE__), "../app/models", "*.rb")].each {|f| require f}
+Dir[File.join(File.dirname(__FILE__), "../app/controllers", "*.rb")].each {|f| require f}
 
 ActiveRecord::Base.establish_connection(
    :adapter => "sqlite3",
