@@ -14,6 +14,15 @@
     img {
       border: 1px solid black;
     }
+    .rest_form {
+      float:right;
+      margin-right:100px;
+
+    }
+    .rest_prof {
+      float: left;
+      margin: 20px;
+    }
 
     #form {
       border: 2px solid black;
@@ -44,6 +53,9 @@
       margin: 0 auto;
       width: 75%;
     }
+    .rest_list {
+      float: left;
+    }
     ._page ol {
       text-align: left;
     }
@@ -53,6 +65,7 @@
       float: left;
       border: 2px solid black;
       display: block;
+      margin-right: 50px;
     }
     #map-canvas img{ max-width: none; }
     #map_caption {

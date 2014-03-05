@@ -49,17 +49,23 @@
     <body>
 
     <div id="map-canvas"></div>
-      <%= erb :form %>
-    <div class="_page">
+    
+
+    <div class="_page rest_prof">
       <h2><%= r.name %></h2>
       <h3><%= r.phone_num %></h3>
       <h3><%= r.address %></h3>
       <% r.cuisines.each do |c| %>
       <a href="/cuisine/<%=c.id%>"><h3><%= c.description %></h3></a>
       <% end %>
+      <br/>
+      <br/>
+      <%= erb :form %>
     </div>
+
+
     <br/>
-    <div class="_list">
+    <div class="_list rest_list">
       
       <h3><%= 
         if r.grade == "B"
