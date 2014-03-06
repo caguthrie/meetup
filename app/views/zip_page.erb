@@ -99,11 +99,11 @@
   <% end %>
   <h3><%= 
     if r.grade == "B"
-      "<img src=\"/img/b.jpg\">"
+      "<img src=\"/img/b.jpg\" alt=\"B\">"
     elsif r.grade == "C"
-      "<img src=\"/img/c.jpg\">"
+      "<img src=\"/img/c.jpg\" alt=\"C\">"
     else
-      "<img src=\"/img/pending.jpg\">"
+      "<img src=\"/img/pending.jpg\" alt=\"Pending\">"
     end %>
     Violation points: <%= r.score %>
   </h3>
