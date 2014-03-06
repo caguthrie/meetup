@@ -12,13 +12,18 @@ class RestaurantViolation < ActiveRecord::Base
 
       begin
         d = Date.iso8601(components[8].split(" ")[0])
+        r = Restaurant.find_by(phone: components[6].to_i)
+        if r != nil
+          next if r.date != d.to_s
+        else
+          next
+        end
       rescue
         next
       end
 
       next if (Date.today - d) > 200      
       
-      next if !Restaurant.exists?(phone: components[6])
       next if !Violation.exists?(vio_code: components[10])
       rv_array = RestaurantViolation.where(restaurant_id: Restaurant.find_by(phone: components[6]).id)
       found_dupe = false

@@ -1,5 +1,6 @@
 class CreateViolations < ActiveRecord::Migration
   def change
+    drop_table :violations
     create_table :violations do |t|
       t.boolean :critical_vio
       t.string :vio_code
