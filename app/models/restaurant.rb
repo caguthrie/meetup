@@ -8,41 +8,9 @@ class Restaurant < ActiveRecord::Base
     self.phone.to_s.strip.split('').insert(3, "-").insert(7, "-").join()
   end
 
-  # def get_violations
-  #   violation_id_array = RestaurantViolation.where(restaurant_id: self.id)
-  #   violation_id_array.collect! do |v|
-  #     v.violation_id
-  #   end
-  #   violation_id_array.collect! do |violation_id|
-  #     Violation.where(id: violation_id)
-  #   end
-  #   violation_id_array.collect! do |violation|
-  #     violation.first.description
-  #   end
-  # end
-
-  # def get_vio_code
-  #   violation_id_array = RestaurantViolation.where(restaurant_id: self.id)
-  #   violation_id_array.collect! do |v|
-  #     v.violation_id
-  #   end
-  #   violation_id_array.collect! do |violation_id|
-  #     Violation.where(id: violation_id)
-  #   end
-  #   violation_id_array.collect! do |violation|
-  #     violation.first.vio_code
-  #   end
-  # end
-
   def self.zip_list(zip_code)
     Restaurant.where(zip: zip_code)
   end
-
-  # def self.create_profile(array)
-  #   array.collect! do |restaurant|
-  #     "#{restaurant.name} #{restaurant.address} ph #{restaurant.phone_num} #{restaurant.get_violations}"
-  #   end
-  # end
 
   def address
     @address = "#{self.building_number} #{self.street_name}, #{self.zip}"
@@ -67,6 +35,7 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+#"30191841","DJ REYNOLDS PUB AND RESTAURANT","1","351       ","WEST   57 STREET                                  ","10019","2122452912","03","2013-07-22 00:00:00","D","10F","11","A","2013-07-22 00:00:00","2014-02-20 06:01:08.513000000"
   def self.seed
     f = File.new("./textfiles/WebExtract.txt", 'r')
     f.gets
